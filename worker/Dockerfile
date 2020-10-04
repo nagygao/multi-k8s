@@ -1,0 +1,17 @@
+# Specify the base image
+FROM node:alpine
+
+# Set up the working directory
+WORKDIR '/app'
+
+# Copy over the package.json file
+COPY ./package.json ./
+
+# Install node dependencies
+RUN npm install
+
+# Copy over all the other files
+COPY ./ ./
+
+# Start productive server
+CMD ["npm", "run", "Start"]
