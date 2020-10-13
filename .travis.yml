@@ -15,9 +15,22 @@ after_success:
     - docker build -t nagygao/multi-server ./server
     - docker build -t nagygao/multi-worker ./worker
     # Log in to docker CLI
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    #- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to docker hub
-    - docker push nagygao/multi-client
-    - docker push nagygao/multi-nginx
-    - docker push nagygao/multi-server
-    - docker push nagygao/multi-worker
+    #- docker push nagygao/multi-client
+    #- docker push nagygao/multi-nginx
+    #- docker push nagygao/multi-server
+    #- docker push nagygao/multi-worker
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: 'eu-central-1'
+  app: 'multi-docker'
+  env: 'MultiDocker-env'
+  bucket_name: 'elasticbeanstalk-eu-central-1-989629703132'
+  bucket_path: 'docker-multi'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

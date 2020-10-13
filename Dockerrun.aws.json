@@ -1,29 +1,33 @@
 {
-    "AWSEBDockerrunVersion": 2,
+    "AWSDockerrunVersion": 2,
     "containerDefinitions": [
         {
             "name": "client",
             "image": "nagygao/multi-client",
             "hostname": "client",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "server",
             "image": "nagygao/multi-server",
             "hostname": "api",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "worker",
-            "image": "nagygao/worker",
+            "image": "nagygao/multi-worker",
             "hostname": "worker",
-            "essential": false
+            "essential": false,
+            "memory": 128
         },
         {
             "name": "nginx",
             "image": "nagygao/multi-nginx",
             "hostname": "nginx",
             "essential": true,
+            "memory": 128,
             "portMappings": [
                 {
                     "hostPort": 80,
