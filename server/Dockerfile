@@ -1,17 +1,6 @@
-# Specify the base image
-FROM node:alpine
-
-# Set up the working directory
-WORKDIR '/app'
-
-# Copy over the package.json file
+FROM node:14.14.0-alpine
+WORKDIR "/app"
 COPY ./package.json ./
-
-# Install node dependencies
 RUN npm install
-
-# Copy over all the other files
-COPY ./ ./
-
-# Start development server
+COPY . .
 CMD ["npm", "run", "start"]

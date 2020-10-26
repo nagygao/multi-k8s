@@ -1,17 +1,11 @@
-# Specify the base image
-FROM node:alpine
-# Set up the working directory
+FROM node:alpine as builder
 WORKDIR '/app'
-# Copy over the package.json file
-COPY ./package*.json ./
-# Install node dependencies
+COPY ./package.json ./
 RUN npm install
-# Copy over all the other files
-COPY ./ ./
-# Build the project
+COPY . .
 RUN npm run build
 
 FROM nginx
 EXPOSE 3000
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=0 /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
