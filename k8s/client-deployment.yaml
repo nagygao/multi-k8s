@@ -6,7 +6,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-        component: web
+      component: web
   template:
     metadata:
       labels:
@@ -15,9 +15,5 @@ spec:
       containers:
         - name: client
           image: stephengrider/multi-client
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
           ports:
             - containerPort: 3000
