@@ -29,3 +29,6 @@ spec:
           - name: postgres-storage
             mountPath: /var/lib/postgresql/data
             subPath: postgres
+        env:
+          - name: POSTGRES_PASSWORD
+            value: 12345asdf
